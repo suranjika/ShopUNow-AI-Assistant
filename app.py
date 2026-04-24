@@ -21,7 +21,10 @@ from langgraph.graph import StateGraph, END
 
 # ── Load environment ───────────────────────────────────────────────────────────
 load_dotenv()
+# Read API key fresh each time — picks up Hugging Face secrets automatically
 GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY", "")
+if GOOGLE_API_KEY:
+    os.environ["GOOGLE_API_KEY"] = GOOGLE_API_KEY
 
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -342,6 +345,11 @@ Answer:"""
 
     return graph.compile(), retriever
 
+# ── Pre-load agent if API key available from HF secrets ───────────────────────
+_startup_key = os.environ.get("GOOGLE_API_KEY", "")
+if _startup_key:
+    build_agent(_startup_key)
+
 # ── Session state ──────────────────────────────────────────────────────────────
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -465,6 +473,7 @@ with col_send:
     send = st.button("Send →", use_container_width=True)
 
 if send and user_input.strip():
+    # Try sidebar input first, then fall back to environment variable (HF secret)
     api_key = os.environ.get("GOOGLE_API_KEY", "")
     if not api_key:
         st.error("⚠️ Please enter your Gemini API key in the sidebar to use the assistant.")
