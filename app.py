@@ -253,9 +253,10 @@ class ChatState(TypedDict):
 
 # ── Build Agent (cached) ───────────────────────────────────────────────────────
 @st.cache_resource(show_spinner="⚙️ Building AI agent — this takes ~30 seconds on first load...")
-def build_agent():
-    if not GOOGLE_API_KEY:
+def build_agent(api_key: str):
+    if not api_key:
         return None, None
+    os.environ["GOOGLE_API_KEY"] = api_key
 
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
     router_llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.2)
@@ -473,7 +474,7 @@ if send and user_input.strip():
         st.session_state.stats["total"] += 1
 
         with st.spinner("🤖 Thinking..."):
-            agent_app, _ = build_agent()
+            agent_app, _ = build_agent(api_key)
             if agent_app is None:
                 st.error("⚠️ Could not initialise the agent. Please check your API key.")
             else:
