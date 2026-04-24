@@ -5,14 +5,14 @@
 langchain>=0.2.0
 langchain-core>=0.2.0
 langchain-community>=0.2.0
-langchain-google-genai>=1.0.0
+langchain-google-genai>=2.0.0
 langchain-text-splitters>=0.2.0
 
 # LangGraph for agent orchestration
 langgraph>=0.1.0
 
 # Google Generative AI (Gemini)
-google-generativeai>=0.5.0
+google-genai>=1.0.0
 
 # Vector store
 faiss-cpu>=1.7.4

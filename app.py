@@ -261,7 +261,7 @@ def build_agent(api_key: str):
         return None, None
     os.environ["GOOGLE_API_KEY"] = api_key
 
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
+    embeddings = GoogleGenerativeAIEmbeddings(model="text-embedding-004")
     router_llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.2)
     answer_llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.3)
 
