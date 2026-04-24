@@ -1,0 +1,32 @@
+# ShopUNow AI Assistant — Dependencies
+# Install: pip install -r requirements.txt
+
+# LangChain core
+langchain>=0.2.0
+langchain-core>=0.2.0
+langchain-community>=0.2.0
+langchain-google-genai>=1.0.0
+langchain-text-splitters>=0.2.0
+
+# LangGraph for agent orchestration
+langgraph>=0.1.0
+
+# Google Generative AI (Gemini)
+google-generativeai>=0.5.0
+
+# Vector store
+faiss-cpu>=1.7.4
+
+# Streamlit frontend
+streamlit>=1.35.0
+
+# API layer
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+pydantic[email]>=2.0.0
+
+# Async support for notebook/FastAPI coexistence
+nest-asyncio>=1.6.0
+
+# Utilities
+python-dotenv>=1.0.0
