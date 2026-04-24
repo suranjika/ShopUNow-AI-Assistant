@@ -22,7 +22,7 @@ def build_vectorstore(k: int = 2) -> tuple[FAISS, object]:
     Returns:
         (vectorstore, retriever) tuple.
     """
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
 
     # Build Document objects with department metadata
     docs = []
